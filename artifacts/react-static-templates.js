@@ -8,6 +8,7 @@ export default {
 '__react_static_root__/src/pages/Home.js': require('__react_static_root__/src/pages/Home.js').default,
 '__react_static_root__/src/pages/index.js': require('__react_static_root__/src/pages/index.js').default,
 '__react_static_root__/src/pages/Login.js': require('__react_static_root__/src/pages/Login.js').default,
+'__react_static_root__/src/pages/Logout.js': require('__react_static_root__/src/pages/Logout.js').default,
 '__react_static_root__/src/pages/SlowPage.js': require('__react_static_root__/src/pages/SlowPage.js').default,
 '__react_static_root__/src/containers/Post': require('__react_static_root__/src/containers/Post').default
 }

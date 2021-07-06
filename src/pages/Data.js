@@ -1,8 +1,10 @@
 import { Button, MenuItem, Spinner } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
+import { navigate } from "@reach/router";
 import React, { useEffect, useState } from "react";
 import { useStaticInfo } from "react-static";
 import { SERVER_ADDRESS } from "../constants/general";
+import { getUser } from "../utils/actions";
 
 export function Data() {
   const [dataAmount, setDataAmount] = useState({ id: "light", text: "Light" });
@@ -20,9 +22,9 @@ export function Data() {
       case "normal":
         endpoint = "/sales";
         break;
-      case "large":
-        endpoint = "/heavy-operation";
-        break;
+      // case "large":
+      //   endpoint = "/heavy-operation";
+      //   break;
     }
     let records = await fetch(SERVER_ADDRESS + endpoint, {
       method: "GET",
@@ -46,12 +48,13 @@ export function Data() {
     fetchData();
   }, [dataAmount]);
 
-  useEffect(()=>{
-    if(document.getElementsByTagName("nav")[0].style.display == "none")
-    {
-      document.getElementsByTagName("nav")[0].style.display = "block"
+  useEffect(() => {
+    if (document.getElementsByTagName("nav")[0].style.display == "none") {
+      document.getElementsByTagName("nav")[0].style.display = "block";
     }
-  })
+    window.scrollTo(0, 0);
+    getUser() ? null : navigate("/login");
+  }, []);
   return (
     <div>
       <div className="h-screen">
@@ -60,7 +63,7 @@ export function Data() {
             items={[
               { id: "light", text: "Light" },
               { id: "normal", text: "Normal" },
-              { id: "large", text: "Large" },
+              // { id: "large", text: "Large" },
             ]}
             itemRenderer={amountRenderer}
             filterable={false}
@@ -70,7 +73,9 @@ export function Data() {
           </Select>
         </div>
         {loading ? (
-          <Spinner />
+          <div className="flex flex-col items-center pt-64">
+            <Spinner />
+          </div>
         ) : (
           <table className="w-full flex-grow">
             <thead>

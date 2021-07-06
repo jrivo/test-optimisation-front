@@ -3,6 +3,7 @@ import { useNavigate } from "@reach/router";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { SERVER_ADDRESS } from "../constants/general";
+import { getUser, storeItem } from "../utils/actions";
 
 export function Login() {
   const [username, setUsername] = useState("");
@@ -25,10 +26,13 @@ export function Login() {
     const query = { username, password };
     try {
       var res = await axios.post(SERVER_ADDRESS + "/login", query);
+      console.log(res.status);
+      console.log(res.data);
       console.log(res);
+      storeItem("user", res.data.user);
       navigate("/data");
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setInvalidCredentials(true);
     }
 
@@ -43,7 +47,12 @@ export function Login() {
 
   useEffect(() => {
     document.getElementsByTagName("nav")[0].style.display = "none";
-  }),[];
+    if(getUser())
+    {
+      navigate("/data")
+    }
+  }),
+    [];
   return (
     <div className="flex justify-center items-center h-screen">
       <div
