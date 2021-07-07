@@ -12,6 +12,7 @@ import Home from "./pages/Home";
 import Data from "./pages/Data";
 import SlowPage from "./pages/SlowPage";
 import Logout from "./pages/Logout";
+import HeavyOperation from "./pages/HeavyOperation";
 // Any routes that start with 'dynamic' will be treated as non-static routes
 addPrefetchExcludes(["dynamic"]);
 
@@ -21,6 +22,7 @@ function App() {
       <nav>
         <Link to="/home">Home</Link>
         <Link to="/data">Data</Link>
+        <Link to="/heavy-operation">Heavy Operation</Link>
         <Link to="/slow-page">Slow Page</Link>
         <Link to="/logout">Logout</Link>
       </nav>
@@ -31,8 +33,9 @@ function App() {
             <Login path="/login" />
             <Home path="/home" />
             <Data path="/data" />
+            <HeavyOperation path="/heavy-operation" />
             <SlowPage path="/slow-page" />
-            <Logout path="/logout"/>
+            <Logout path="/logout" />
             <Routes path="*" />
           </Router>
         </React.Suspense>
